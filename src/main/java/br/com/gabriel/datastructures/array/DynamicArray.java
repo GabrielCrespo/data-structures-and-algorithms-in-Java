@@ -1,6 +1,7 @@
 package br.com.gabriel.datastructures.array;
 
 public class DynamicArray {
+
     private static final int DEFAULT_CAPACITY = 16;
 
     private int[] data;
