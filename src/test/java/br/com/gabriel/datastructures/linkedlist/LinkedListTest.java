@@ -228,4 +228,134 @@ public class LinkedListTest {
             linkedList.get(position);
         });
     }
+
+    @Test
+    public void shouldDeleteNodeIfNodeIsInTheHead() {
+
+        int data = linkedList.getFirst();
+        int expectedSize = linkedList.size() - 1;
+
+        linkedList.delete(data);
+
+        Assertions.assertEquals(expectedSize, linkedList.size());
+
+    }
+
+    @Test
+    public void shouldDeleteNodeIfDataExists() {
+
+        int position = Utils.getRandomInteger(0, linkedList.size());
+        int data = linkedList.get(position);
+        int expectedSize = linkedList.size() - 1;
+
+        linkedList.delete(data);
+
+        Assertions.assertEquals(expectedSize, linkedList.size());
+
+    }
+
+    @Test
+    public void shouldNotDeleteNodeIfDataNotExists() {
+
+        int data = Utils.getRandomInteger(11, 15);
+        int expectedSize = linkedList.size();
+
+        linkedList.delete(data);
+
+        Assertions.assertEquals(expectedSize, linkedList.size());
+
+    }
+
+    @Test
+    public void shouldDeleteNodeHeadWhenPositionIsZero() {
+
+        int position = 0;
+        int expectedSize = linkedList.size() - 1;
+
+        linkedList.deleteByPosition(position);
+
+        Assertions.assertEquals(expectedSize, linkedList.size());
+    }
+
+    @Test
+    public void shouldDeleteInAnyPosition() {
+
+        int position = Utils.getRandomInteger(0, linkedList.size());
+        int expectedSize = linkedList.size() - 1;
+
+        linkedList.deleteByPosition(position);
+
+        Assertions.assertEquals(expectedSize, linkedList.size());
+
+    }
+
+    @Test
+    public void shouldDeleteTheLastPosition() {
+
+        int position = linkedList.size() - 1;
+        int expectedSize = linkedList.size() - 1;
+
+        linkedList.deleteByPosition(position);
+
+        Assertions.assertEquals(expectedSize, linkedList.size());
+
+    }
+
+    @Test
+    public void deleteByPositionShouldThrowAnExceptionWhenListIsEmpty() {
+
+        int position = 1;
+
+        linkedList.clear();
+
+        Assertions.assertThrows(IllegalStateException.class, () -> linkedList.deleteByPosition(position));
+
+    }
+
+    @Test
+    public void deleteByPositionShouldThrowExceptionWhenPositionIsLessThanZero() {
+
+        int position = Utils.getRandomInteger(-10, 0);
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> linkedList.deleteByPosition(position));
+
+    }
+
+    @Test
+    public void deleteByPositionShouldThrowExceptionWhenPositionIsGreaterThanSize() {
+
+        int size = linkedList.size();
+        int position = Utils.getRandomInteger(size, size * 2);
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> linkedList.deleteByPosition(position));
+
+    }
+
+    @Test
+    public void shouldReturnTrueWhenListContainsDataInHead() {
+
+        int data = linkedList.getFirst();
+
+        Assertions.assertTrue(linkedList.contains(data));
+
+    }
+
+    @Test
+    public void shouldReturnTruWhenListContainsData() {
+
+        int position = Utils.getRandomInteger(0, linkedList.size());
+        int data = linkedList.get(position);
+
+        Assertions.assertTrue(linkedList.contains(data));
+
+    }
+
+    @Test
+    public void shouldReturnFalseWhenListDoesNotContaisData() {
+
+        int data = Utils.getRandomInteger(10, 15);
+
+        Assertions.assertFalse(linkedList.contains(data));
+
+    }
 }

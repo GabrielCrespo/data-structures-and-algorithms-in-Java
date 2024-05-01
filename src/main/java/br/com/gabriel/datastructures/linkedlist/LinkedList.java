@@ -93,7 +93,7 @@ public class LinkedList {
 
     public void add(int position, int data) {
 
-        if (position < 0 || position > size()) {
+        if (position < 0 || position >= size()) {
             throw new IllegalArgumentException("Index out of list bounds");
         }
 
@@ -165,6 +165,7 @@ public class LinkedList {
 
             if (current.next.data == data) {
                 current.next = current.next.next;
+                return;
             }
 
             current = current.next;
